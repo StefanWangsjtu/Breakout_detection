@@ -1,0 +1,11 @@
+# profile for non-mevis users to link to PythonQt
+
+include ( python.prf )  
+
+INCLUDEPATH += $$PWD/../src
+
+# check if debug or release
+
+
+# win32::LIBS += $$PWD/../liPythonQt-Qt5-Python$${PYTHON_VERSION}$${DEBUG_EXT}.lib
+unix::LIBS += -L$$PWD -lPythonQt-Qt5-Python$${PYTHON_VERSION}$${DEBUG_EXT}

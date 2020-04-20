@@ -27,8 +27,10 @@ IndexSelct::IndexSelct(QWidget *parent) :
     mainModule = PythonQt::self()->getMainModule();
     connect(PythonQt::self(),SIGNAL(pythonStdOut(QString)),this,SLOT(stdOut(const QString)));
     connect(PythonQt::self(),SIGNAL(pythonStdErr(QString)),this,SLOT(stdErr(const QString)));
-    mainModule.evalFile("/home/stefan/QtObjects/breakout_detection/loadModel.py");
+    mainModule.evalFile("/home/stefan/QtObject/Breakout_detection/breakout_detection/loadModel.py");
     //    modelName = mainModule.call("getModelName").toString();
+
+    modelName = "Test SG filter";
 
     mainModule.call("hello");
     ui->modelNameLabel->setText(modelName);
@@ -39,13 +41,14 @@ IndexSelct::IndexSelct(QWidget *parent) :
     {
         time.append((double(i)));// * 10 ms
 
-//        if (i >= 400)
-//            part_time.append(i);
+        if (i >= 400)
+            part_time.append(i);
 
     }
 
-    Smoothed_c_data = vector<double>(500, 0.0);
-    Smoothed_f_data = vector<double>(500, 0.0);
+    Smoothed_c_data = vector<double>(100, 0.0);
+    Smoothed_f_data = vector<double>(100, 0.0);
+
     feed_data = QVector<double>(500, 0.0);
     current_data = QVector<double>(500, 0.0);
     brkout_data = QVector<double>(500, 0.0);
@@ -171,14 +174,13 @@ void IndexSelct::showcurve()
 
      //    Smoothed_c_data = sg_smooth(vector<double>(temp1.begin() + 400, temp1.end()), 10, 2);
      //    Smoothed_f_data = sg_smooth(vector<double>(temp2.begin() + 400, temp2.end()), 10, 2);
-
-
-     Smoothed_c_data = sg_smooth(current_data.toStdVector(), 5, 2);
-     Smoothed_f_data = sg_smooth(feed_data.toStdVector(), 5, 2);
-
-
-    Smoothed_current->setSamples(time, QVector<double>::fromStdVector(Smoothed_c_data));
-    Smoothed_feed->setSamples(time, QVector<double>::fromStdVector(Smoothed_f_data));
+    for(int i = 0; i<100; i++)
+    {
+        Smoothed_c_data[i] = current_data[i + 400];
+        Smoothed_f_data[i] = feed_data[i + 400];
+    }
+    Smoothed_current->setSamples(part_time, QVector<double>::fromStdVector(sg_smooth(Smoothed_c_data, 5, 2)));
+    Smoothed_feed->setSamples(part_time, QVector<double>::fromStdVector(sg_smooth(Smoothed_f_data, 5, 2)));
 
     ui->mainplot->replot();
     ui->feedrateplot->replot();

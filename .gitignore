@@ -1,1 +1,3 @@
 build-breakout_detection-Desktop-Debug/
+breakout_detection/__pycache__
+breakout_detection/*.pro

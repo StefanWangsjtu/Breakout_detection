@@ -28,6 +28,7 @@ HEADERS  += indexselct.h \
 
 FORMS    += indexselct.ui \
     dialog.ui
+
 INCLUDEPATH += /usr/local/qwt-6.1.4-svn/include
 INCLUDEPATH += PythonQt
 LIBS += -L"/usr/local/qwt-6.1.4-svn/lib" -lqwt

@@ -65,7 +65,7 @@ public:
 
     QTimer updateTimer;
     QVector<double> time;
-//    QVector<double> part_time;
+    QVector<double> part_time;
 
     QVector<double> current_data;
     vector<double> Smoothed_c_data;// 平滑后平均电流

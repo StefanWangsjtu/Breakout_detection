@@ -2,9 +2,10 @@
 ## This Python File is Built for Load Model You Have Trained and Apply it to Breakout Detection in Fast EDM Drilling
 ## *********************************************************************************************************************
 
+
 #from PythonQt import *
-#import sys
-#sys.path.append("/usr/local/lib/python3.5/dist-packages")
+import sys
+sys.path.append("/usr/local/lib/python3.5/dist-packages")
 #import pickle
 #import numpy as np
 #from sklearn import svm
@@ -21,7 +22,7 @@ from PythonQt import *
 import numpy as np
 
 def hello():
-    a = np.ones(3,4)
+    a = np.ones((3,4))
     print(a)
 
 ## 获取文件名

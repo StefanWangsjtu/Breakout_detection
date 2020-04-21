@@ -2,6 +2,7 @@
 #include <QApplication>
 #include<dialog.h>
 #include "savitzy_golay_filter.h"
+#include <ctime>
 
 int main(int argc, char *argv[])
 {
@@ -9,6 +10,7 @@ int main(int argc, char *argv[])
 
     Dialog dlg;
     dlg.show();
+
 
 
     return a.exec();
